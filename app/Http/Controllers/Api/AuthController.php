@@ -73,7 +73,7 @@ class AuthController extends BaseController
 
             $userInfo = new Object_();
             $userInfo->id = $input['user_provider_id'];
-            $userInfo->user_provider_token = $input['user_provider_token'];
+            $userInfo->user_provider_token = $input['user_provider_token'] ?? '';
             $userInfo->name = $input['name'];
             $userInfo->email = $input['email'];
 

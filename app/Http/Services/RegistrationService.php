@@ -88,10 +88,11 @@ class RegistrationService
         $user = User::find($user->id);
         $dto = new UserResponseDto();
         $roomService = new RoomService();
+        $avatar = empty($avatar) ? '' : 'https://'. Request::getHttpHost() . '/' . $user->avatar;
 
         $dto->id = $user->id;
         $dto->name = $user->name;
-        $dto->avatar = 'https://'. Request::getHttpHost() . '/' . $user->avatar;
+        $dto->avatar = $avatar;
         $dto->email = $user->email;
         $dto->phone = $user->phone;
         $dto->preferences = $user->preferences;
