@@ -131,7 +131,6 @@ class User extends Authenticatable
         $this->notify(new SendPassword($psw));
     }
 
-
     /**
      * @param Request $request
      * @return $this

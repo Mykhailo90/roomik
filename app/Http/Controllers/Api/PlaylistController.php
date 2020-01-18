@@ -128,11 +128,11 @@ class PlaylistController extends BaseController
 
     /**
      * @param Request $request
-     * @param Playlist $playlist
-     * @param PlaylistService $playlistService
+     * @param $id
+     * @param SongService $songService
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, PlaylistService $playlistService)
+    public function update(Request $request, $id, SongService $songService)
     {
         $input = $request->post();
 
@@ -162,8 +162,8 @@ class PlaylistController extends BaseController
             return $this->sendError('Failed update.', 'Playlist not found', 404);
         }
 
-        if ($user->id != $playlist->ownerId) {
-            return $this->sendError('Failed update.', 'You are not an owner', 403);
+        if (!$songService->checkUserCanAddRemoveSong($user, $playlist)) {
+            return $this->sendError('Failed store.', 'You are not have an access to change Playlist');
         }
 
         if (isset($input['name'])) {

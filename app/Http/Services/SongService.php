@@ -46,8 +46,9 @@ class SongService
         }
 
         $adminUserIds = AdminList::where('room_id', $playlist->roomId)->pluck('user_id')->toArray();
+        $adminUserIds = array_values($adminUserIds);
 
-        if (in_array($playlist->ownerId, $adminUserIds)) {
+        if (in_array($user->id, $adminUserIds)) {
             return true;
         }
 
